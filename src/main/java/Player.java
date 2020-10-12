@@ -56,7 +56,7 @@ public class Player {
                     break;
                 }
             }
-            if(same) result.add(cards);
+            if(same && !isStraight(sort(cards))) result.add(cards);
         }
         return result;
     }
@@ -76,7 +76,27 @@ public class Player {
                 }
                 temp = y;
             }
-            if(sequential) result.add(sorted);
+            if(sequential && !isFlush(sorted)) result.add(sorted);
+        }
+        return result;
+    }
+
+    protected ArrayList<Card[]> straight_flush(){
+        Card[] data = new Card[5];
+        ArrayList<Card[]> result = new ArrayList<>();
+        for(Card[] cards : Combination.combinationUtil(this.card.toArray(new Card[0]), data, 0, this.card.size()-1, 0, 5) ){
+            Card[] sorted = sort(cards);
+            int temp = (sorted[0].number.value() / 4) - 1;
+            boolean sequential = true;
+            for(Card x:sorted){
+                int y = x.number.value()/4;
+                if((temp + 1) != y){
+                    sequential = false;
+                    break;
+                }
+                temp = y;
+            }
+            if(sequential && isFlush(sorted)) result.add(sorted);
         }
         return result;
     }
@@ -108,5 +128,27 @@ public class Player {
             c[i+1] = key;
         }
         return c;
+    }
+
+    private static boolean isStraight(Card[] c){
+        int temp = (c[0].number.value() / 4) - 1;
+        for(Card x:c){
+            int y = x.number.value()/4;
+            if((temp + 1) != y){
+                return false;
+            }
+            temp = y;
+        }
+        return true;
+    }
+
+    private static boolean isFlush(Card[] c){
+        int temp = c[0].icon.value();
+        for(Card x:c){
+            if(x.icon.value() != temp){
+                return false;
+            }
+        }
+        return true;
     }
 }

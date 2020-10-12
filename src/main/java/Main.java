@@ -8,9 +8,9 @@ public class Main {
         ArrayList<Card> c = new ArrayList<>();
         c.add(new Card(CardNumber.THREE, CardIcon.DIAMOND));
         c.add(new Card(CardNumber.THREE, CardIcon.SPADE));
-        c.add(new Card(CardNumber.FIVE, CardIcon.LOVE));
-        c.add(new Card(CardNumber.FOUR, CardIcon.TREE));
-        c.add(new Card(CardNumber.SIX, CardIcon.TREE));
+        c.add(new Card(CardNumber.FIVE, CardIcon.SPADE));
+        c.add(new Card(CardNumber.FOUR, CardIcon.SPADE));
+        c.add(new Card(CardNumber.SIX, CardIcon.SPADE));
         c.add(new Card(CardNumber.JACK, CardIcon.DIAMOND));
         c.add(new Card(CardNumber.QUEEN, CardIcon.DIAMOND));
         c.add(new Card(CardNumber.KING, CardIcon.DIAMOND));
@@ -53,6 +53,13 @@ public class Main {
         }
         System.out.println("\nStraight");
         for(Card[] cards: p.straight()) {
+            for(Card d: cards){
+                System.out.print(d.number+" "+d.icon+"   ");
+            }
+            System.out.println();
+        }
+        System.out.println("\nStraight flush");
+        for(Card[] cards: p.straight_flush()) {
             for(Card d: cards){
                 System.out.print(d.number+" "+d.icon+"   ");
             }
