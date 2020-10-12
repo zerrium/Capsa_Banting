@@ -1,4 +1,3 @@
-import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -62,6 +61,26 @@ public class Player {
         return result;
     }
 
+    protected ArrayList<Card[]> straight(){
+        Card[] data = new Card[5];
+        ArrayList<Card[]> result = new ArrayList<>();
+        for(Card[] cards : Combination.combinationUtil(this.card.toArray(new Card[0]), data, 0, this.card.size()-1, 0, 5) ){
+            Card[] sorted = sort(cards);
+            int temp = (sorted[0].number.value() / 4) - 1;
+            boolean sequential = true;
+            for(Card x:sorted){
+                int y = x.number.value()/4;
+                if((temp + 1) != y){
+                    sequential = false;
+                    break;
+                }
+                temp = y;
+            }
+            if(sequential) result.add(sorted);
+        }
+        return result;
+    }
+
     protected ArrayList<Card> sort(){
         Card[] temp = this.card.toArray(new Card[0]);
         int n = temp.length;
@@ -75,5 +94,19 @@ public class Player {
             temp[i+1] = key;
         }
         return new ArrayList<>(Arrays.asList(temp));
+    }
+
+    private static Card[] sort(Card[] c){
+        int n = c.length;
+        for (int j = 1; j < n; j++) {
+            Card key = c[j];
+            int i = j-1;
+            while ( (i > -1) && ( (c[i].icon.value() + c[i].number.value()) > (key.icon.value() + key.number.value()) ) ) {
+                c[i+1] = c[i];
+                i--;
+            }
+            c[i+1] = key;
+        }
+        return c;
     }
 }

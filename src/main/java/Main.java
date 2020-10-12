@@ -4,7 +4,7 @@ public class Main {
 
     public static void main(String[] args){
 
-        System.out.println("Hi");
+        System.out.println("Cards (ordered)");
         ArrayList<Card> c = new ArrayList<>();
         c.add(new Card(CardNumber.THREE, CardIcon.DIAMOND));
         c.add(new Card(CardNumber.THREE, CardIcon.SPADE));
@@ -23,29 +23,36 @@ public class Main {
         c.add(new Card(CardNumber.NINE, CardIcon.TREE));
         Player p = new Player("Streaamz", c);
         p.sort().forEach(i -> System.out.println(i.number+" "+i.icon));
-        System.out.println();
+        System.out.println("\nPair");
         for(Card[] cards: p.pair()) {
             for(Card d: cards){
                 System.out.print(d.number+" "+d.icon+"   ");
             }
             System.out.println();
         }
-        System.out.println();
+        System.out.println("\nThrice");
         for(Card[] cards: p.thrice()) {
             for(Card d: cards){
                 System.out.print(d.number+" "+d.icon+"   ");
             }
             System.out.println();
         }
-        System.out.println();
+        System.out.println("\nBomb");
         for(Card[] cards: p.bomb()) {
             for(Card d: cards){
                 System.out.print(d.number+" "+d.icon+"   ");
             }
             System.out.println();
         }
-        System.out.println();
+        System.out.println("\nFlush");
         for(Card[] cards: p.flush()) {
+            for(Card d: cards){
+                System.out.print(d.number+" "+d.icon+"   ");
+            }
+            System.out.println();
+        }
+        System.out.println("\nStraight");
+        for(Card[] cards: p.straight()) {
             for(Card d: cards){
                 System.out.print(d.number+" "+d.icon+"   ");
             }
