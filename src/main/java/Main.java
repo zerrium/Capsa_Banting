@@ -11,15 +11,15 @@ public class Main {
         c.add(new Card(CardNumber.FIVE, CardIcon.SPADE));
         c.add(new Card(CardNumber.FOUR, CardIcon.SPADE));
         c.add(new Card(CardNumber.SIX, CardIcon.SPADE));
-        c.add(new Card(CardNumber.JACK, CardIcon.DIAMOND));
-        c.add(new Card(CardNumber.QUEEN, CardIcon.DIAMOND));
-        c.add(new Card(CardNumber.KING, CardIcon.DIAMOND));
-        c.add(new Card(CardNumber.ACE, CardIcon.TREE));
+        c.add(new Card(CardNumber.JACK, CardIcon.SPADE));
+        c.add(new Card(CardNumber.QUEEN, CardIcon.SPADE));
+        c.add(new Card(CardNumber.KING, CardIcon.SPADE));
+        c.add(new Card(CardNumber.ACE, CardIcon.SPADE));
         c.add(new Card(CardNumber.SEVEN, CardIcon.DIAMOND));
         c.add(new Card(CardNumber.SEVEN, CardIcon.SPADE));
         c.add(new Card(CardNumber.SEVEN, CardIcon.LOVE));
         c.add(new Card(CardNumber.SEVEN, CardIcon.TREE));
-        c.add(new Card(CardNumber.TEN, CardIcon.TREE));
+        c.add(new Card(CardNumber.TEN, CardIcon.SPADE));
         c.add(new Card(CardNumber.NINE, CardIcon.TREE));
         Player p = new Player("Streaamz", c);
         p.sort().forEach(i -> System.out.println(i.number+" "+i.icon));
@@ -60,6 +60,13 @@ public class Main {
         }
         System.out.println("\nStraight flush");
         for(Card[] cards: p.straight_flush()) {
+            for(Card d: cards){
+                System.out.print(d.number+" "+d.icon+"   ");
+            }
+            System.out.println();
+        }
+        System.out.println("\nRoyal flush");
+        for(Card[] cards: p.royal_flush()) {
             for(Card d: cards){
                 System.out.print(d.number+" "+d.icon+"   ");
             }

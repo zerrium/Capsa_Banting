@@ -5,6 +5,7 @@ public class Player {
     String name;
     ArrayList<Card> card;
     boolean pass;
+    private ArrayList<Card[]> straight_flush, royal_flush;
 
     protected Player(String name, ArrayList<Card> card){
         this.name = name;
@@ -64,6 +65,8 @@ public class Player {
     protected ArrayList<Card[]> straight(){
         Card[] data = new Card[5];
         ArrayList<Card[]> result = new ArrayList<>();
+        ArrayList<Card[]> result2 = new ArrayList<>();
+        ArrayList<Card[]> result3 = new ArrayList<>();
         for(Card[] cards : Combination.combinationUtil(this.card.toArray(new Card[0]), data, 0, this.card.size()-1, 0, 5) ){
             Card[] sorted = sort(cards);
             int temp = (sorted[0].number.value() / 4) - 1;
@@ -76,29 +79,31 @@ public class Player {
                 }
                 temp = y;
             }
-            if(sequential && !isFlush(sorted)) result.add(sorted);
+            if(sequential){
+                if(isFlush(sorted)){
+                    if(sorted[4].icon.value() + sorted[4].number.value() == 47){ //ace spade
+                        result3.add(sorted);
+                    }else{
+                        result2.add(sorted);
+                    }
+
+                }else{
+                    result.add(sorted);
+                }
+
+            }
         }
+        this.straight_flush = result2;
+        this.royal_flush = result3;
         return result;
     }
 
     protected ArrayList<Card[]> straight_flush(){
-        Card[] data = new Card[5];
-        ArrayList<Card[]> result = new ArrayList<>();
-        for(Card[] cards : Combination.combinationUtil(this.card.toArray(new Card[0]), data, 0, this.card.size()-1, 0, 5) ){
-            Card[] sorted = sort(cards);
-            int temp = (sorted[0].number.value() / 4) - 1;
-            boolean sequential = true;
-            for(Card x:sorted){
-                int y = x.number.value()/4;
-                if((temp + 1) != y){
-                    sequential = false;
-                    break;
-                }
-                temp = y;
-            }
-            if(sequential && isFlush(sorted)) result.add(sorted);
-        }
-        return result;
+        return this.straight_flush;
+    }
+
+    protected ArrayList<Card[]> royal_flush(){
+        return this.royal_flush;
     }
 
     protected ArrayList<Card> sort(){
