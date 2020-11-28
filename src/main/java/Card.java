@@ -1,8 +1,8 @@
 public class Card {
-    CardNumber number;
-    CardIcon icon;
+    CardValue number;
+    CardRank icon;
 
-    protected Card(CardNumber number, CardIcon icon){
+    protected Card(CardValue number, CardRank icon){
         this.number = number;
         this.icon = icon;
     }

@@ -1,12 +1,12 @@
-public enum CardIcon {
-    DIAMOND(0),
-    TREE(1),
-    LOVE(2),
-    SPADE(3);
+public enum CardRank {
+    DIAMONDS(0),
+    CLUBS(1),
+    HEARTS(2),
+    SPADES(3);
 
     private int value;
 
-    CardIcon(int value) {
+    CardRank(int value) {
         this.value = value;
     }
 
